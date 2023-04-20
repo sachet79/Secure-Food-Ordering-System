@@ -51,7 +51,7 @@ class Item(models.Model):
         return reverse("main:item-update", kwargs={
             'slug': self.slug
         })
-
+ 
 class Reviews(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     item = models.ForeignKey(Item, on_delete = models.CASCADE)
@@ -61,7 +61,7 @@ class Reviews(models.Model):
 
     class Meta:
         verbose_name = 'Review'
-        verbose_name_plural = 'Reviews'
+        verbose_name_plural = 'review'
 
     def __str__(self):
         return self.review

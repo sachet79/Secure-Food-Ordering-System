@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from phonenumber_field.modelfields import PhoneNumberField
 
 admin.site.site_header = "Login Administrator"
 admin.site.site_title = "Food-Ordering"
