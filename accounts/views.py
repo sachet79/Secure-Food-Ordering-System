@@ -15,7 +15,7 @@ def signup_view(request):
     else:
         form = NewUSerForm()
     return render(request, 'accounts/signup.html', { 'form': form })
-
+    
 
 @require_http_methods(["GET", "POST"])
 def login_view(request):
@@ -31,7 +31,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', { 'form': form })
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET", "POST"])
 def logout_view(request):
     if request.method == 'POST':
             logout(request)
