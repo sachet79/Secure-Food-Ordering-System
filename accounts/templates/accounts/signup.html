@@ -4,10 +4,10 @@
 <div class="container">
     <h1>Signup</h1>
     <div class="form-border">
-        <form class="site-form" action="{% url 'accounts:signup' %}" method="post">
+        <form class="site-form" action="{% url 'accounts:signup' %}" autocomplete="off" method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" value="Signup" class="btn btn-success">
+            <input type="submit" autocomplete="off" value="Signup" class="btn btn-success">
         </form>
     </div>
 </div>

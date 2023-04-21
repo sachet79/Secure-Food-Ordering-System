@@ -35,13 +35,18 @@
       {% csrf_token %}
       <div class="row">
         <div class="col-sm-11">
-          <input type="text" name="review" class="form-control" placeholder="Enter Your Review">
-          <input type="hidden" name="rslug" class="form-control" value="{{item.slug}}">
+          <!-- {{ form.review }} -->
+          <!-- {{ form.rslug }} -->
+          <!-- <input type="hidden" name="rslug" class="form-control" value="{{item.slug}}"> -->
+          <input type="text" name="review" class="form-control" placeholder="Enter Your Review" onkeyup="this.value=this.value.replace(/[^\w\s]/gi,'')">
+          <input type= "hidden" name="rslug" class="form-control" value="{{item.slug}}">
         </div>
         <div class="col-sm-1">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
+
+
     </form>
 
     {% for review in reviews %}

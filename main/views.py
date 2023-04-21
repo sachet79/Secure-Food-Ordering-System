@@ -30,6 +30,7 @@ def menuDetail(request, slug):
 
 @login_required
 def add_reviews(request):
+    
     if request.method == "POST":
         user = request.user
         rslug = request.POST.get("rslug")
@@ -39,7 +40,30 @@ def add_reviews(request):
         reviews = Reviews(user=user, item=item, review=review, rslug=rslug)
         reviews.save()
         messages.success(request, "Thank You for Reviewing this Item!!")
-    return redirect(f"/dishes/{item.slug}")
+        return redirect(f"/dishes/{item.slug}")  # fix indentation here
+    else:
+        rslug = request.GET.get("rslug")
+        item = Item.objects.get(slug=rslug)
+        form = ReviewForm(initial={"rslug": rslug})
+        return render(request, "add_reviews.html", {"form": form, "item": item})
+
+# def add_reviews(request):
+    # if request.method == "POST":
+        # form = ReviewForm(request.POST)
+        # if form.is_valid():
+        # user = request.user
+        # rslug = request.POST.get("rslug")
+        # item = Item.objects.get(slug=rslug)
+        # review = request.POST.get("review")
+# 
+        # reviews = Reviews(user=user, item=item, review=review, rslug=rslug)
+        # reviews.save()
+        # messages.success(request, "Thank You for Reviewing this Item!!")
+    # return redirect(f"/dishes/{item.slug}")
+    # else:
+            #  form = ReviewForm()
+    # return render(request, "add_reviews.html", {"form": form})
+# 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item

@@ -2,8 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
+from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+
 
 
 def validate_password_special_characters(password):
@@ -28,23 +30,30 @@ def validate_no_special_characters(fnamelname):
         )    
 
 class NewUSerForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True, validators=[validate_email])
     phone_number = PhoneNumberField()
     first_name = forms.CharField(required=True, validators=[validate_no_special_characters])
     last_name = forms.CharField(required=True, validators=[validate_no_special_characters])
 
+    
 
     password1 = forms.CharField(
         label="Password",
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete':'new-password' }),
         validators=[validate_password_special_characters],
     )
     password2 = forms.CharField(
         label="Password confirmation",
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete':'new-password'}),
         strip=False,
     )    
+
+    def clean_email(self):
+        if User.objects.filter(email=self.cleaned_data['email']).exists():
+            raise forms.ValidationError("The given email is already registered")
+        return self.cleaned_data['email']
+
 
 
     class Meta:
