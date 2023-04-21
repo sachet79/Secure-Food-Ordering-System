@@ -104,6 +104,7 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     cart_item = CartItems.objects.get_or_create(
@@ -115,6 +116,7 @@ def add_to_cart(request, slug):
     return redirect("main:cart")
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def get_cart_items(request):
     cart_items = CartItems.objects.filter(user=request.user,ordered=False)
     bill = cart_items.aggregate(Sum('item__price'))
