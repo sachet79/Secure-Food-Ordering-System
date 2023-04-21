@@ -13,12 +13,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .decorators import *
 from django.db.models import Sum
+from django.views.decorators.http import require_http_methods
+
 
 class MenuListView(ListView):
     model = Item
     template_name = 'main/home.html'
     context_object_name = 'menu_items'
 
+@require_http_methods(["GET", "POST"])
 def menuDetail(request, slug):
     item = Item.objects.filter(slug=slug).first()
     reviews = Reviews.objects.filter(rslug=slug).order_by('-id')[:7] 
@@ -28,6 +31,7 @@ def menuDetail(request, slug):
     }
     return render(request, 'main/dishes.html', context)
 
+@require_http_methods(["GET", "POST"])
 @login_required
 def add_reviews(request):
     
@@ -44,8 +48,10 @@ def add_reviews(request):
     else:
         rslug = request.GET.get("rslug")
         item = Item.objects.get(slug=rslug)
-        form = ReviewForm(initial={"rslug": rslug})
-        return render(request, "add_reviews.html", {"form": form, "item": item})
+        # form = ReviewForm(initial={"rslug": rslug})
+        # return render(request, "add_reviews.html", {"form": form, "item": item})
+
+
 
 # def add_reviews(request):
     # if request.method == "POST":
@@ -135,6 +141,7 @@ class CartDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+@require_http_methods(["GET", "POST"])
 @login_required
 def order_item(request):
     cart_items = CartItems.objects.filter(user=request.user,ordered=False)
@@ -143,6 +150,7 @@ def order_item(request):
     messages.info(request, "Item Ordered")
     return redirect("main:order_details")
 
+@require_http_methods(["GET", "POST"])
 @login_required
 def order_details(request):
     items = CartItems.objects.filter(user=request.user, ordered=True,status="Active").order_by('-ordered_date')
@@ -162,7 +170,9 @@ def order_details(request):
     }
     return render(request, 'main/order_details.html', context)
 
+
 @login_required(login_url='/accounts/login/')
+@require_http_methods(["GET", "POST"])
 @admin_required
 def admin_view(request):
     cart_items = CartItems.objects.filter(item__created_by=request.user, ordered=True,status="Delivered").order_by('-ordered_date')
@@ -173,6 +183,7 @@ def admin_view(request):
 
 @login_required(login_url='/accounts/login/')
 @admin_required
+@require_http_methods(["GET", "POST"])
 def item_list(request):
     items = Item.objects.filter(created_by=request.user)
     context = {
@@ -182,6 +193,7 @@ def item_list(request):
 
 @login_required
 @admin_required
+@require_http_methods(["GET", "POST"])
 def update_status(request,pk):
     if request.method == 'POST':
         status = request.POST['status']
@@ -193,6 +205,7 @@ def update_status(request,pk):
 
 @login_required(login_url='/accounts/login/')
 @admin_required
+@require_http_methods(["GET", "POST"])
 def pending_orders(request):
     items = CartItems.objects.filter(item__created_by=request.user, ordered=True,status="Active").order_by('-ordered_date')
     context = {
@@ -202,6 +215,7 @@ def pending_orders(request):
 
 @login_required(login_url='/accounts/login/')
 @admin_required
+@require_http_methods(["GET", "POST"])
 def admin_dashboard(request):
     cart_items = CartItems.objects.filter(item__created_by=request.user, ordered=True)
     pending_total = CartItems.objects.filter(item__created_by=request.user, ordered=True,status="Active").count()
