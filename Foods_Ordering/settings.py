@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +26,9 @@ SECRET_KEY = 'v7)ouo@=dhswvnfs!@o$v07^m#+2l^1+c#n%bel2eqn!5f^fx^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Application definition
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'crispy_forms',
     'phonenumber_field',
+    'captcha',
+
 ]
 
 MIDDLEWARE = [
@@ -104,6 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+RECAPTCHA_PUBLIC_KEY = '6LekGYgjAAAAAKm4_Prc2M2VkqBcm_E6dywXBFP-'
+RECAPTCHA_PRIVATE_KEY = '6LekGYgjAAAAAHxwJIBls8n_ByZXnPT7zMWbJBrg'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -129,8 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SESSION_COOKIE_SECURE = True
-
 SECURE_BROWSER_XSS_FILTER = True
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -149,5 +155,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:8000'
 
 
+# SECURE_SSL_CERTIFICATE = 'C:\\Users\\Sachet Karkera\\certificate.crt'
+# SECURE_SSL_KEY = 'C:\\Users\\Sachet Karkera\\private.key'
 
 

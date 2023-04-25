@@ -5,6 +5,8 @@ from phonenumber_field.formfields import PhoneNumberField
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 
@@ -70,3 +72,5 @@ class NewUSerForm(UserCreationForm):
             user.save()
         return user
 
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+ 
