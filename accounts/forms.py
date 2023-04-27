@@ -73,4 +73,5 @@ class NewUSerForm(UserCreationForm):
         return user
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
  

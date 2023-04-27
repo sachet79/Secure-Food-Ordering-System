@@ -34,6 +34,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -153,10 +155,7 @@ SESSION_EXPIRE_SECONDS = 720
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
-SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:8000'
+SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:3002'
 
-
-# SECURE_SSL_CERTIFICATE = 'C:\\Users\\Sachet Karkera\\certificate.crt'
-# SECURE_SSL_KEY = 'C:\\Users\\Sachet Karkera\\private.key'
 
 
