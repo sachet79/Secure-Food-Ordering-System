@@ -28,7 +28,7 @@ SECRET_KEY = 'v7)ouo@=dhswvnfs!@o$v07^m#+2l^1+c#n%bel2eqn!5f^fx^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://securefoodorderingsystem.herokuapp.com','*']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -158,7 +158,7 @@ SESSION_EXPIRE_SECONDS = 720
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
-SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:3002'
+#SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:3002'
 
 django_heroku.settings(locals())
 
