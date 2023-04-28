@@ -113,8 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-RECAPTCHA_PUBLIC_KEY = '6LekGYgjAAAAAKm4_Prc2M2VkqBcm_E6dywXBFP-'
-RECAPTCHA_PRIVATE_KEY = '6LekGYgjAAAAAHxwJIBls8n_ByZXnPT7zMWbJBrg'
+RECAPTCHA_PUBLIC_KEY = '6LdkkMclAAAAALUD6CRa9KT0U7p2eeO3dgc4N70V'
+RECAPTCHA_PRIVATE_KEY = '6LdkkMclAAAAAHsxHtFNPzHVi9XXUZelxXmB-kTv'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Internationalization
