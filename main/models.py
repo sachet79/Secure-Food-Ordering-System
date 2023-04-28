@@ -8,7 +8,7 @@ class Item(models.Model):
     LABELS = (
         ('Best Selling Food', 'Best Selling Food'),
         ('New Food', 'New Food'),
-        ('Spicy Food🔥', 'Spicy Food🔥'),
+        ('Spicy Food', 'Spicy Food'),
     )   
 
     LABEL_COLOUR = (
