@@ -1,1 +1,1 @@
-web gunicorn SECURE FOOD ORDERING SYSTEM.wsgi:application --log-file -
+web gunicorn SECURE_FOOD_ORDERING_SYSTEM.wsgi
