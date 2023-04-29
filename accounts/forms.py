@@ -9,7 +9,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
 
-
+# Password Validation
 def validate_password_special_characters(password):
     """
    Validator function to check that a password contains contain special characters
@@ -19,7 +19,8 @@ def validate_password_special_characters(password):
             _("The password must contain at least one of the following special characters: !@#$%^&*()_+-="),
             code='password_no_special_characters',
         )
-    
+
+ # First name & Last name validation   
 def validate_no_special_characters(fnamelname):
     """
     Validator function to check that a string doesn't contain special characters
@@ -50,7 +51,8 @@ class NewUSerForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'autocomplete':'new-password'}),
         strip=False,
     )    
-
+    
+    #email already registered
     def clean_email(self):
         if User.objects.filter(email=self.cleaned_data['email']).exists():
             raise forms.ValidationError("The given email is already registered")
@@ -72,6 +74,7 @@ class NewUSerForm(UserCreationForm):
             user.save()
         return user
 
+#captcha implementation
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
  
