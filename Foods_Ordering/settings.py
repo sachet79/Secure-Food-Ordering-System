@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'Foods_Ordering.wsgi.application'
 
 DATABASES = {
     'default': {
+        'default': dj_database_url.config(default='sqlite:///db.sqlite3'),
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
